@@ -8,9 +8,16 @@ export default function App() {
     setQueue([...queue, { ...customer, id: Date.now(), status: "waiting" }])
   }
 
-  const updateStatus=(Id, status)=>{}
+  const updateStatus=(Id, newstatus)=>{
 
-  const removeFromQueue=(Id)=>{}
+    setQueue(queue.map(customer=>customer.id===Id?{...customer, status: newstatus}:customer))
+
+  }
+
+  const removeFromQueue=(Id)=>{
+// ! keep only that customer whose id is not equal to the id we want to remove
+      setQueue(queue.filter(customer=>customer.id!==Id))
+  }
 
   return(
     <div className="app">
