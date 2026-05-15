@@ -7,14 +7,16 @@ function QueueForm({onAdd}) {
     const handleSubmit=(e)=>{{
         e.preventDefault()
         // !validations'
-        if(!name.trim()|| !service.trim()){
+        if(!name.trim()|| !service.trim()) return;
+            
+            
             //  ~ on add triggers the function addToQueue
             onAdd({name, service})
             setName("")
             setService("")
         }
     }
-    }
+    
 
   return (
     <>
@@ -39,7 +41,9 @@ function QueueForm({onAdd}) {
                     <option value="billing">Billing</option>
                 </select>
             </div>
-            <button type="submit"><FaUserPlus /> Add to Queue</button>
+            <button type="submit" >
+                <FaUserPlus /> Add to Queue
+            </button>
         </form>
     </>
   )
