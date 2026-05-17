@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useState, useEffect } from 'react'
 
 export default function useCart() {
@@ -50,7 +50,7 @@ export default function useCart() {
             const existingItem = prevCart.find(item => item.id === product.id);
             if (existingItem) {
                 return currentCart.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item)
-    }
+            }
             return [...prevCart, { ...product, quantity: 1 }];
         });
     };
@@ -63,10 +63,18 @@ export default function useCart() {
         if (quantity < 1) return
         setCart(prevCart => prevCart.map(item => item.id === productId ? { ...item, quantity } : item));
     }
-    
-    return (
-        <div>
 
-        </div>
+    // ! this is not react 19 or later
+    const total = useMemo(() => {
+        return Number(cart.reduce((sum, item) => {
+            const itemTotal = item.price * (item.quantity || 0);
+            return sum + itemTotal;
+        }, 0));
+    }, [cart])
+
+
+
+    return (
+        { cart, addToCart, removeFromCart, updateQuantity, total, }
     )
 }
