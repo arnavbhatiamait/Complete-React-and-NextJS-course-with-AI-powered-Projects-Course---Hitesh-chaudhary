@@ -5,6 +5,7 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import Counter from './components/Counter'
 import Navbar from './components/Navbar'
+import Post from './components/Post'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,6 +15,7 @@ function App() {
    {/* <Navbar/> */}
    <h1>Zustand </h1>
    <Counter />
+   <Post />
    </>
   )
 }
