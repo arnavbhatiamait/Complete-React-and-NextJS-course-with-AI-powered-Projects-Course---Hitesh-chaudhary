@@ -89,8 +89,8 @@ function Chaicode() {
   return (
     <>
       <AppContent />
-      <h1>Chai code component tut</h1>
-      <p>This component is in the same file</p>
+      {/* <h1>Chai code component tut</h1>
+      <p>This component is in the same file</p> */}
     </>
   )
 }
@@ -101,7 +101,7 @@ function App() {
   return (
     <>
       <Chaicode />
-      <h1>Vite + React</h1>
+      {/* <h1>Vite + React</h1> */}
     </>
   )
 }
