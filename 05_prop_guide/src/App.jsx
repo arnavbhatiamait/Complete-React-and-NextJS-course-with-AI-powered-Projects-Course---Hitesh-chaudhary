@@ -4,7 +4,7 @@ import BasicProps from './components/BasicProps'
 import ChildrenProps from './components/ChildrenProps'
 import ComplexProps from './components/ComplexProps'
 import RefProps from './components/RefProps'
-import ThemeToggler from './components/ThemeToggler'
+import ThemeToggler, { ThemeProvider } from './components/ThemeToggler'
 import './App.css'
 
 function Navigation() {
@@ -85,22 +85,15 @@ function AppContent() {
 }
 
 
-function Chaicode() {
-  return (
-    <>
-      <AppContent />
-      {/* <h1>Chai code component tut</h1>
-      <p>This component is in the same file</p> */}
-    </>
-  )
-}
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
     <>
-      <Chaicode />
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
       {/* <h1>Vite + React</h1> */}
     </>
   )
