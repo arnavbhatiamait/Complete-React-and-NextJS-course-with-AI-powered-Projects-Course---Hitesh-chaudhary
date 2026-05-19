@@ -1,12 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const expenses=[]
+    // const expenses=[]
     const expenseForm=document.getElementById('expense-name');
     const expenseAmountInput=document.getElementById('expense-amount');
     const submitBtn=document.querySelector('button');
     const expenseList=document.getElementById('expense-list');
     const totalAmountDisplay=document.getElementById('total-amount');
 
-    
+    let expenses=JSON.parse(localStorage.getItem("expenses")) || [];
+    // let totalAmount=calculateTotal();
+
+    renderExpenses();
 
     submitBtn.addEventListener('click', (e)=>{
         e.preventDefault();
@@ -20,7 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
             };
             expenses.push(newExpense);
             renderExpenses();
-            updateTotal();}});
+            updateTotal();
+            saveExpensesTolocal();
+        }
+    });
     function renderExpenses(){
         expenseList.innerHTML="";
         expenses.forEach(expense=>{
@@ -35,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateTotal(){
         const totalAmount=expenses.reduce((sum, expense)=>sum+expense.amount, 0);
         totalAmountDisplay.textContent=totalAmount.toFixed(2);
+        return totalAmount;
      }
     expenseList.addEventListener('click', (e)=>{
         if(e.target.tagName==="BUTTON"){
@@ -47,4 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     })
+    function saveExpensesTolocal(){
+        localStorage.setItem("expenses", JSON.stringify(expenses));
+    }
 });
