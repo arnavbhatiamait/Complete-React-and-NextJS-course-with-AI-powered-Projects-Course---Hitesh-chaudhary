@@ -28,7 +28,26 @@ document.addEventListener("DOMContentLoaded", ()=>{
     function saveTasks(){
         localStorage.setItem("tasks", JSON.stringify(tasks));
     };
-    function RenderTasks(tasks){
-
+    function RenderTasks(task){
+        console.log(task);
+        const li=document.createElement('li');
+        li.setAttribute("data-id", task.id);
+        if(task.completed) li.classList.add("completed");
+        li.innerHTML=`
+        <span>${task.text}</span>
+        <button>delete</button>
+        `;
+        li.addEventListener('click', (e)=>{
+            if(e.target.tagName==="BUTTON") return;
+            task.completed=!task.completed;
+            li.classList.toggle("completed");
+            saveTasks();
+        });
+        li.querySelector("button").addEventListener('click', (e)=>{
+            tasks = tasks.filter(t => t.id !== task.id);
+            saveTasks();
+            todoList.removeChild(li);
+        });
+        todoList.appendChild(li);
     }   
 })
