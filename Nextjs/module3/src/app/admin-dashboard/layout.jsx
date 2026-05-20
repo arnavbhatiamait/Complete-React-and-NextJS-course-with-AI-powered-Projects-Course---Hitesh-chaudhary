@@ -6,7 +6,7 @@ const AdminLayout = ({children,analytics,team}) => {
         <div className="overflow-auto">
           {children}
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-row-2 gap-4">
 <div className="overflow-auto">
           {analytics}
         </div>   
