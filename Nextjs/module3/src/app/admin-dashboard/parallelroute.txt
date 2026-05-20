@@ -1,0 +1,13 @@
+Parallel Route in Next.js
+In Next.js, a Parallel Route is created using the @ convention inside the app router.
+It allows you to show another route in parallel to the current layout without fully navigating away.
+This is commonly used for:
+Side-by-side layouts
+Multi-step forms
+app/
+│
+├── dashboard/  
+│   ├── page.jsx
+│   └── @analytics/
+│       └── page.jsx
+
