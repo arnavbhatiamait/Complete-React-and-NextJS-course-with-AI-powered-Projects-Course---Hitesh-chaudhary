@@ -1,0 +1,16 @@
+One Level Above Route
+In Next.js, a One Level Above Route is created using the (..) convention inside the app
+router.
+It allows you to show another route one level above the current layout without fully navigating away.
+This is commonly used for:
+Nested layouts
+Breadcrumbs
+Contextual navigation
+app/
+│
+├── dashboard/
+│   ├── page.js
+│   └── @settings/
+│       └── (..)profile/
+│           └── page.js
+    
