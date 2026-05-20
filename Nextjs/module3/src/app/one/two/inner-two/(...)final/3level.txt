@@ -1,0 +1,20 @@
+3 level Intercepted Route
+In Next.js, a Three Level Intercepted Route is created using the (...) convention inside the app router.
+It allows you to show another route from the app root without fully navigating away.
+This is commonly used for:
+Global modals
+Universal overlays
+
+
+app/
+│
+├── shop/
+│   ├── products/
+│   │   ├── details/
+│   │   │   ├── page.jsx
+│   │   │   └── @modal/
+│   │   │       └── (..)(..)(..)cart/
+│   │   │           └── page.jsx
+│
+├── cart/
+│   └── page.jsx
