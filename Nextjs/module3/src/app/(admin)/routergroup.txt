@@ -1,0 +1,18 @@
+router group in Next.js is a way to organize your routes into groups. This can be useful for grouping related routes together, such as all admin routes or all API routes.
+Why Use Route Groups?
+
+They help you:
+
+Organize large apps
+Separate layouts
+Group authenticated/public pages
+Keep URLs clean
+
+You create a route group using parentheses:
+
+(folderName)
+
+Difference Between Slug and Route Group
+Feature	Syntax	Appears in URL?
+Slug	[slug]	Yes
+Route Group	(group)	No
