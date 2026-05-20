@@ -1,0 +1,25 @@
+Same Level Intercepted Route
+In Next.js, a Same Level Intercepted Route is created using the (.) convention inside the app router.
+
+It allows you to show another route inside the current layout without fully navigating away.
+
+This is commonly used for:
+
+Modals
+Side panels
+Overlays
+Preview pages
+
+
+app/
+│
+├── feed/
+│   ├── page.js
+│   └── @modal/
+│       └── (.)photo/
+│           └── [id]/
+│               └── page.js
+│
+├── photo/
+│   └── [id]/
+│       └── page.js
