@@ -1,7 +1,11 @@
+"use client";
 import React from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export function Navbar() {
+  const pathname = usePathname()
+
   return    (
 <header className="text-gray-400 bg-gray-900 body-font">
   <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -12,16 +16,16 @@ export function Navbar() {
       <span className="ml-3 text-xl">Tailblocks</span>
     </a>
     <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-      <Link href="/" className="mr-5 hover:text-white">
+      <Link href="/" className={`mr-5 hover:text-white ${pathname === '/' ? 'text-white' : ''}`}>
         Home
       </Link>
-      <Link href="/about" className="mr-5 hover:text-white">
+      <Link href="/about" className={`mr-5 hover:text-white ${pathname === '/about' ? 'text-white' : ''}`}>
         About
       </Link>
-      <Link href="/user" className="mr-5 hover:text-white">
+      <Link href="/user" className={`mr-5 hover:text-white ${pathname === '/user' ? 'text-white' : ''}`}>
         User
       </Link>
-      <Link href="/Contact" className="mr-5 hover:text-white">
+      <Link href="/Contact" className={`mr-5 hover:text-white ${pathname === '/Contact' ? 'text-white' : ''}`}>
         Contact
       </Link>
    
