@@ -1,0 +1,24 @@
+2 level above Route
+In Next.js, a Two Level Above Route is created using the (..)(..) convention inside the
+app router.
+It allows you to show another route two levels above the current layout without fully navigating away.
+
+app/
+│
+├── dashboard/
+│   ├── analytics/
+│   │   ├── page.jsx
+│   │   └── @modal/
+│   │       └── (..)(..)settings/
+│   │           └── page.jsx
+│
+├── settings/
+│   └── page.jsx
+
+
+Other Interception Patterns
+Pattern	Meaning
+(.)about	same level
+(..)photo	one level up
+(..)(..)settings	two levels up
+(...)login	from app root
