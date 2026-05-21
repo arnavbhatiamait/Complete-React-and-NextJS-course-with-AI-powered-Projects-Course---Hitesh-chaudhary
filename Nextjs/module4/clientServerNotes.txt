@@ -1,0 +1,15 @@
+Client and Server Components in Next js 
+Client and Server Components are two types of components in Next.js that allow developers to build applications with different rendering strategies.
+Client Components:
+Client Components are rendered on the client-side, meaning they are executed in the user's browser. These components are typically used for interactive elements, such as forms, buttons, and other UI elements that require user interaction. Client Components can also fetch data from APIs and update the UI dynamically without requiring a full page reload.
+Server Components:
+Server Components, on the other hand, are rendered on the server-side. They are executed on the server before being sent to the client's browser. Server Components are often used for rendering static content, such as headers, footers, and other non-interactive elements. They can also be used to fetch data from databases or APIs and render it on the server before sending it to the client.
+
+In Next.js, you can use both Client and Server Components together in the same application. This allows you to optimize performance by rendering static content on the server while still providing interactive features on the client-side. By leveraging the strengths of both types of components, developers can create efficient and responsive applications with Next.js.
+
+In Server componets we can not use useState and useEffect hooks because they are client side hooks and server components are rendered on the server side. However, we can use other hooks like useContext and useReducer in Server Components as they are not specific to client-side rendering.
+
+-> CANT USE 
+    USE STATE 
+    USE EFFECT
+    BUTTONS NAD OTHER INTERACTIVE ELEMENTS
