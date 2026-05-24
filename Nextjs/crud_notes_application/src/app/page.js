@@ -10,7 +10,22 @@ export default function Home() {
   const [notes, setNotes] = useState([]);
 
   const handleEdit=()=>{}
-  const handleDelete=()=>{}
+  const handleDelete=async (id)=>{
+    if (!confirm("Are you sure you want to delete this note?")) return;
+    try {
+      const res = await fetch(`/api/notes/${id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        fetchNotes();
+        alert("Note deleted successfully");
+      } else {
+        alert("Error deleting note");
+      }
+    } catch (error) {
+      console.error("Error deleting note:", error);
+    }
+  }
 
   const onSubmit = async (e) => {
     e.preventDefault();
