@@ -1,18 +1,17 @@
 "use client"
 import React from 'react'
-import {useParams} from 'next/navigation'
-import {usePathname} from "next/navigation";
-const ShopPage = () => {
+import {useParams,usePathname} from 'next/navigation'
+const TagItemPage = () => {
   const params = useParams()
   console.log(params)
   const pathname = usePathname();
 
   return (
     <div>
-      <h1>Shop Page</h1>
+      <h1>Tag Item Page</h1>
       <p>Current path: {pathname}</p>
     </div>
   )
 }
 
-export default ShopPage
+export default TagItemPage
