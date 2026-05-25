@@ -16,3 +16,12 @@ export async function updateToDo(title, desc, isCompleted) {
         data: newData
     }
 }
+
+export async function submitUserData(formData) {
+    const name = formData.get("name")
+    const email = formData.get("email")
+    console.log(name, email)
+
+
+
+}
