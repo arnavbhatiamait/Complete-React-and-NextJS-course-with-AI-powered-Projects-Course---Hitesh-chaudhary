@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import { createToDo } from "./actions/actions";
+import { createToDo } from "../actions/actions";
 
 export default function Home() {
   // async function createToDo(formData){
