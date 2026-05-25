@@ -1,6 +1,7 @@
 "use client"
 import Image from "next/image";
 import { createToDo } from "../actions/actions";
+import Link from "next/link";
 
 export default function Home() {
   // async function createToDo(formData){
@@ -82,6 +83,14 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Link href={"/about"} className="text-indigo-500 inline-flex items-center">Go to About Page
+      </Link>
+
+      <Link href={{
+        pathname:"/forms",
+        query:{name:"Arnav",age:22}
+      }} className="text-green-500 inline-flex items-center ml-4">Go to Forms Page
+      </Link>
     </section>
   );
 }
