@@ -12,6 +12,10 @@ export default function Home() {
   // }
   return (
     <section className="text-gray-600 body-font">
+      
+      <Image src={"/image.png"} alt="Test Image" width={500} height={300}/>
+      
+      
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-col text-center w-full mb-20">
           <h2 className="text-xs text-indigo-500 tracking-widest font-medium title-font mb-1">ROOF PARTY POLAROID</h2>
