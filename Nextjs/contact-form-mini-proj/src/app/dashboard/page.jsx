@@ -1,6 +1,7 @@
 import { connectToDB } from '@/lib/db'
 import { contacts } from '@/lib/model/contact';
 import React from 'react'
+import StatusButton from '@/components/status-btn';
 
 const Dashboard = async () => {
   await connectToDB();
@@ -15,6 +16,7 @@ const Dashboard = async () => {
                     <p className="text-gray-600">{contact.email}</p>
                     <p className="mt-2">{contact.message}</p>
                     <p className="mt-2 text-sm text-gray-500">Status: {contact.status}</p>
+                    <StatusButton id={contact._id.toString()} />
                 </div>
             ))}
         </div>
