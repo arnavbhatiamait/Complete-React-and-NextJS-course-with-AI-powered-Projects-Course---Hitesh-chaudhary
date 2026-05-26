@@ -15,6 +15,8 @@ export default function Home() {
       
       <Image src={"/image.png"} alt="Test Image" width={500} height={300}/>
       
+      <Image src={"https://images.unsplash.com/photo-1554668048-5055c5654bbc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"}
+      width={500} height={300} alt="Test Image2"/>
       
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-col text-center w-full mb-20">
