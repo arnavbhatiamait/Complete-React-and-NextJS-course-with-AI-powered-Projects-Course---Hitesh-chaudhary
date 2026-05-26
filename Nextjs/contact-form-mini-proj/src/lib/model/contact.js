@@ -5,4 +5,4 @@ const contactSchema = new mongoose.Schema({
   message: String,
   status: { type: String, default: "pending" },
 },{timestamps: true});
-export const Contact = mongoose.model("Contact", contactSchema);
+export const contacts =  mongoose.models.Contact || mongoose.model("Contact", contactSchema) ;

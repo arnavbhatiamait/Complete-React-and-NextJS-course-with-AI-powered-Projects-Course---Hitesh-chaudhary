@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 
 export const connectToDB = async () => {
   try {
-    const connection = await mongoose.connect(process.env.MONGODB_CONN);
+    const mongoURI = `${process.env.MONGODB_CONN}/contact-form-db`
+    console.log("Connecting to MongoDB at:", mongoURI);
+    const connection = await mongoose.connect(mongoURI);
     console.log("MongoDB connection established:", connection.connection.host);
     console.log("Connected to MongoDB");
   }
