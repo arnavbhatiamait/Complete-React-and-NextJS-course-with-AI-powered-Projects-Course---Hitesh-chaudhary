@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import PostList from "@/components/post-list";
+import AddPost from "@/components/add-post";
 export default function Home() {
   // ! traditional way of fetching data on client side
   // const [data, setData] = React.useState(null);
@@ -52,5 +53,11 @@ export default function Home() {
   //   );
   // }
   return (
-  <PostList />  );
+    <div>
+      <h1>Posts</h1>
+      
+  <PostList /> 
+  <AddPost />
+    </div>
+   );
 }
