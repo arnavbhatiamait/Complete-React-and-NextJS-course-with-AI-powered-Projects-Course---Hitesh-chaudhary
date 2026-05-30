@@ -13,9 +13,11 @@ async function addPost(newPost) {
 }
 
 export default function AddPost() {
+    const queryClient = useQueryClient();
     const mutation = useMutation({
         mutationFn: addPost,
         onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: ["posts"]});
             alert("Post added successfully");
         },
         onError: () => {

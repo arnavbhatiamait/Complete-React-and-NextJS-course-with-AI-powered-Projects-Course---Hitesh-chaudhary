@@ -25,7 +25,7 @@ export default function PostList() {
     console.log(data);
     return (
        <div>
-        {data.slice(0,5).map(post => (
+        {data.map(post => (
             <div key={post.id}>
                 <h3>title:{post.title}</h3>
                 <p> body: {post.body}</p>
