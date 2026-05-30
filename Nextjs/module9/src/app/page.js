@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
+import PostList from "@/components/post-list";
 export default function Home() {
   // ! traditional way of fetching data on client side
   // const [data, setData] = React.useState(null);
@@ -30,25 +31,26 @@ export default function Home() {
 
   // ! using useQuery for data fetching
 
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["user-data"],
-    queryFn: () => fetch("https://api.freeapi.app/api/v1/public/randomusers?page=1&limit=10").then(res => res.json())
-  })
+  // const { data, isLoading, isError, error } = useQuery({
+  //   queryKey: ["user-data"],
+  //   queryFn: () => fetch("https://api.freeapi.app/api/v1/public/randomusers?page=1&limit=10").then(res => res.json())
+  // })
 
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
 
-  if (isError) {
-    return <div>Error: {error.message}</div>;
-  }
-  else {
-    return (
-      <div>
-        data: {JSON.stringify(data)}
-      </div>
-    );
-  }
-  
+  // if (isError) {
+  //   return <div>Error: {error.message}</div>;
+  // }
+  // else {
+  //   return (
+  //     <div>
+  //       data: {JSON.stringify(data)}
+  //     </div>
+  //   );
+  // }
+  return (
+  <PostList />  );
 }
