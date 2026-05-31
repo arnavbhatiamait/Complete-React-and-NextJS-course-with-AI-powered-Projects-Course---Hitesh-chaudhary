@@ -3,4 +3,8 @@ npm install @prisma/client  @prisma/adapter-pg
 or 
 @prisma/adapter-mongodb 
 npx prisma init
+After that, update the schema.prisma file with the above code and then run the following command to create the database and apply the migration:
 npx prisma migrate dev --name init
+
+then run the following command to generate the Prisma Client:
+npx prisma generate
