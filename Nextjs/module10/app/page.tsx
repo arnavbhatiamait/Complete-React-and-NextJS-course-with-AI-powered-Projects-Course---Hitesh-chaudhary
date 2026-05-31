@@ -1,4 +1,5 @@
 import { createUser, getUsers } from "@/actions/actions";
+import PostPage from "@/components/PostPage";
 export default async function Home() {
 
   const data=await getUsers();
@@ -13,6 +14,7 @@ export default async function Home() {
       <input type="email" name="email" placeholder="Enter Email" />
       <button type="submit">Create User</button>
     </form>
+    <PostPage/>
    </div>
   );
 }
