@@ -3,19 +3,44 @@ import React from 'react'
 import {Input} from "@/components/ui/input"
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { useMutation } from '@tanstack/react-query';
+import { addTodo } from '@/actions/todo-actions';
+import { toast } from 'sonner';
 const TodoForm = () => {
 
     const [title, setTitle] = React.useState("");
+    const mutation= useMutation({
+        mutationFn: (data) => addTodo(data),
+        onSuccess: () => {
+            toast.success("Todo added successfully");
+
+        },
+        onError: (error) => {
+            toast.error("Failed to add todo");
+        }
+
+    })
+    const handleSubmit = async(e)=>{
+        e.preventDefault();
+        mutation.mutate({title},{
+            onSuccess: () => {
+                setTitle("");
+            }
+        })
+    }
   return (
     <div>
-        <form onSubmit={(e) => {
-          e.preventDefault();
-        }} className='flex gap-2 mb-8'>
-            <Input value={title} type={"text"} onChange={(e) => setTitle(e.target.value)} placeholder='Enter a new task' className={"flex-1"} />
+        <form onSubmit={handleSubmit} className='flex items-center gap-2'>
+            <Input value={title} type={"text"} onChange={(e) => setTitle(e.target.value)} placeholder='Enter a new task' className={"flex-1"} 
+            diabled={mutation.isPending}
+            />
 
             <Button type='submit' >
                 <Plus size={20} className='mr-2' />
-                Add
+
+                {
+mutation.isPending ? "Adding..." : "Add"
+                }
             </Button>
 
         </form>

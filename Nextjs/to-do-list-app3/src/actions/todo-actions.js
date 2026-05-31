@@ -1,7 +1,7 @@
 "use server"
-import {ConnectedTodo} from "@/lib/connected-todo";
+// import {ConnectedTodo} from "@/lib/connected-todo";
 import { connectToDatabase } from "@/lib/db";
-import {Todo} from "@/lib/todo";
+import { todoSchema } from "@/schema/todo-schema";
 
 export async function addTodo(data){
     await connectToDatabase();
@@ -10,7 +10,7 @@ export async function addTodo(data){
         throw new Error("Invalid data");
     }
     try{
-        const newtodo=await ConnectedTodo.create(validatedFields.data);
+        const newtodo=await todoSchema.create(validatedFields.data);
         return JSON.parse(JSON.stringify(newtodo));
     }
     catch(error){
