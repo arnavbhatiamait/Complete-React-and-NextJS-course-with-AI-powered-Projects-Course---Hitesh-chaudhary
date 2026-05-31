@@ -76,3 +76,14 @@ export async function updateTodo({id, completed}){
         return {error:"Failed to update todo"};
     }
 }
+
+export async function deleteTodo(id){
+    await connectToDatabase();
+    try{
+        await Todo.findByIdAndDelete(id);
+        return {success:true};
+    }catch(error){
+        console.error("Error deleting todo:",error);
+        return {error:"Failed to delete todo"};
+    }
+}
