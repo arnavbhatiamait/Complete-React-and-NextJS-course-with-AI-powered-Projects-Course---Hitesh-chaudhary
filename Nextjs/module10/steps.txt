@@ -1,0 +1,6 @@
+npm install prisma
+npm install @prisma/client  @prisma/adapter-pg
+or 
+@prisma/adapter-mongodb 
+npx prisma init
+npx prisma migrate dev --name init
