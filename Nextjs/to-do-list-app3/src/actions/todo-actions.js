@@ -64,3 +64,15 @@ export async function getTodos(){
         return {error:"Failed to fetch todos"};
     }
 }
+
+export async function updateTodo({id, completed}){
+    await connectToDatabase();
+    try{
+        const updatedTodo = await Todo.findByIdAndUpdate(id, { completed }, { new: true });
+        return JSON.parse(JSON.stringify(updatedTodo));
+    }
+    catch(error){
+        console.error("Error updating todo:",error);
+        return {error:"Failed to update todo"};
+    }
+}
