@@ -1,4 +1,5 @@
 import TodoForm from "@/components/todo-form";
+import TodoList from "@/components/todo-list";
 import { Button } from "@/components/ui/button";
 import { connectToDatabase } from "@/lib/db";
 import { CheckCircle } from "lucide-react";
@@ -25,6 +26,7 @@ export default async function Home() {
         </header>
         <section className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm">
             <TodoForm />
+            <TodoList />
           </section> 
       </main>
     </div>
