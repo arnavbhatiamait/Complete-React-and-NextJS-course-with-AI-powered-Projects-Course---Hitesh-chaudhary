@@ -1,6 +1,8 @@
-import { createUser } from "@/actions/actions";
-import Image from "next/image";
-export default function Home() {
+import { createUser, getUsers } from "@/actions/actions";
+export default async function Home() {
+
+  const data=await getUsers();
+  console.log(data);
   return (
    <div className="">
     <h1>
