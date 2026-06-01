@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { authClient } from "@/lib/auth-client"
+import { toast } from "sonner"
 
 export function LoginForm({
   className,
@@ -23,6 +24,7 @@ export function LoginForm({
       provider: "google",
       callbackURL:"/dashboard"
     });
+    toast.success("Logged in successfully with Google")
     console.log(data);
 
   }
@@ -31,6 +33,7 @@ export function LoginForm({
       provider: "github",
       callbackURL:"/dashboard"
     });
+    toast.success("Logged in successfully with GitHub")
     console.log(data);
 
   }
