@@ -1,3 +1,4 @@
+import LogoutButton from "@/components/logout-button";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { requiredAuth } from "@/lib/auth-guard";
@@ -12,7 +13,7 @@ async function Home() {
         <Image src={user.image!} alt="Profile Picture" width={100} height={100} className="rounded-full mb-4" />
         <h2>{user.name}</h2>
         <p>{user.email}</p>
-        
+        <LogoutButton/>
       </div>
     );
   }
