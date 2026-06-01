@@ -13,4 +13,5 @@ if (!databaseUrl) {
 
 const db = drizzle(postgres(databaseUrl));
 export default db;
+
 export { schema };
