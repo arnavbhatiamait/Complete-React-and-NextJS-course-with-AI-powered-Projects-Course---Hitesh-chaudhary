@@ -2,7 +2,7 @@
 import React from 'react'
 import { Button } from './ui/button'
 import { authClient } from '@/lib/auth-client'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 const LogoutButton = () => {
     const router = useRouter();
