@@ -1,5 +1,7 @@
 "use client"
 import { GalleryVerticalEnd, GitBranchPlus } from "lucide-react"
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -18,11 +20,16 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const router = useRouter()
+  const [emailValue, setEmailValue] = useState('')
+  const [otp, setOtp] = useState('')
+  const [step, setStep] = useState<'request' | 'verify'>('request')
+  const [loading, setLoading] = useState(false)
   const handleGoogleLogin = async () => {
     const data = await authClient.signIn.social({
-      
+
       provider: "google",
-      callbackURL:"/dashboard"
+      callbackURL: "/dashboard"
     });
     toast.success("Logged in successfully with Google")
     console.log(data);
@@ -31,15 +38,62 @@ export function LoginForm({
   const handleGithubLogin = async () => {
     const data = await authClient.signIn.social({
       provider: "github",
-      callbackURL:"/dashboard"
+      callbackURL: "/dashboard"
     });
     toast.success("Logged in successfully with GitHub")
     console.log(data);
 
   }
+  const onRequestOtp = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    try {
+      await authClient.emailOtp.sendVerificationOtp({ email: emailValue, type: 'sign-in' })
+      toast.success('OTP sent to your email')
+      setStep('verify')
+    } catch (err: any) {
+      console.error(err)
+      toast.error(err?.message || 'Failed to send OTP')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const onVerifyOtp = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    try {
+      const { data, error } = await authClient.signIn.emailOtp({ email: emailValue, otp })
+      if (error) {
+        toast.error(error.message || 'Invalid code')
+        return
+      }
+      toast.success('Signed in')
+      router.push('/dashboard')
+    } catch (err: any) {
+      console.error(err)
+      toast.error('Sign in failed')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const onResend = async () => {
+    setLoading(true)
+    try {
+      await authClient.emailOtp.sendVerificationOtp({ email: emailValue, type: 'sign-in' })
+      toast.success('OTP resent')
+    } catch (err: any) {
+      console.error(err)
+      toast.error('Failed to resend')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <form>
+      <form onSubmit={step === 'request' ? onRequestOtp : onVerifyOtp}>
         <FieldGroup>
           <div className="flex flex-col items-center gap-2 text-center">
             <a
@@ -56,22 +110,54 @@ export function LoginForm({
               Don&apos;t have an account? <a href="#">Sign up</a>
             </FieldDescription>
           </div>
-          <Field>
-            <FieldLabel htmlFor="email">Email</FieldLabel>
-            <Input
-              id="email"
-              type="email"
-              placeholder="m@example.com"
-              required
-            />
-          </Field>
-          <Field>
-            <Button type="submit">Login</Button>
-          </Field>
+          {step === 'request' ? (
+            <>
+              <Field>
+                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  required
+                  value={emailValue}
+                  onChange={(e) => setEmailValue(e.target.value)}
+                />
+              </Field>
+              <Field>
+                <Button type="submit" disabled={loading || !emailValue}>
+                  {loading ? 'Sending...' : 'Send code'}
+                </Button>
+              </Field>
+            </>
+          ) : (
+            <>
+              <Field>
+                <FieldLabel htmlFor="otp">Enter code</FieldLabel>
+                <Input
+                  id="otp"
+                  type="text"
+                  placeholder="123456"
+                  required
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                />
+              </Field>
+              <Field>
+                <Button type="submit" disabled={loading || !otp}>
+                  {loading ? 'Verifying...' : 'Verify & Sign in'}
+                </Button>
+              </Field>
+              <Field>
+                <Button type="button" variant="ghost" onClick={onResend} disabled={loading}>
+                  Resend code
+                </Button>
+              </Field>
+            </>
+          )}
           <FieldSeparator>Or</FieldSeparator>
           <Field className="grid gap-4 sm:grid-cols-2">
             <Button variant="outline" type="button" onClick={handleGithubLogin}>
-                <GitBranchPlus/>
+              <GitBranchPlus />
               Continue with GitHub
             </Button>
             <Button variant="outline" type="button" onClick={handleGoogleLogin}>
