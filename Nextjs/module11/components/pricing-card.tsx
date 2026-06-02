@@ -21,6 +21,32 @@ interface PricingCardsProps {
 }
 
 const PricingCards = ({ tiers }: PricingCardsProps) => {
+    const handleSubascribe =async (priceId: string | null) => {
+        if (!priceId) {
+            alert("This plan is free! No subscription needed.");
+            return;
+        }
+        try{
+            const response=await fetch("/api/stripe/checkout",{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({priceId})
+            });
+            const {url} = await response.json();
+            if (url){
+             window.location.href = url as string;
+             }
+             else{
+                alert("Failed to create checkout session. Please try again.");
+             }
+        } 
+        catch(error){
+            console.error("Subscription error:", error);
+            alert("Failed to subscribe. Please try again.");
+        }
+    };
   return (
     <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
       {tiers.map((tier) => (
@@ -69,6 +95,7 @@ const PricingCards = ({ tiers }: PricingCardsProps) => {
             <Button
               className="w-full"
               variant={tier.isPopular ? "default" : "outline"}
+              onClick={() => handleSubascribe(tier.priceId)}
             >
               {tier.price === 0
                 ? "Get Started"
