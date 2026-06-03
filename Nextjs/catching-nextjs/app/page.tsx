@@ -1,6 +1,7 @@
-import { getUserList, updateTheList } from "@/actions";
-import {Suspense} from "react";
+import { Suspense } from "react";
 import UserList from "./component/userlist";
+import UpdateButton from "./component/update-button";
+import AddUser from "./component/add-user";
 type User = {
   id: string;
   name: string;
@@ -11,11 +12,11 @@ type User = {
 export default async function Home() {
   // const res= await getUserList()
   // &with "users", you can later invalidate all cached data associated with that tag when necessary, ensuring that users always see the most up-to-date information without having to wait for the cache to expire naturally.
-    // ! cache: "force-cache" will cache the response and serve it for subsequent requests without revalidating until the cache expires. This is useful for data that doesn't change frequently and can improve performance by reducing the number of network requests.
-    // ^ next: { revalidate: 50 } will revalidate the cached data every 50 seconds. This means that after 50 seconds, the next request will trigger a new fetch to update the cache with fresh data. This is useful for data that changes periodically and ensures that users see up-to-date information without having to wait for the cache to expire completely.
-    // ! If you want to ensure that the data is always fresh and not cached, you can use cache: "no-store" instead, which will bypass the cache and fetch new data on every request.
-    // ~ In summary, using cache: "force-cache" with next: { revalidate: 50 } allows you to balance performance and freshness by caching data for a certain period while still ensuring that it gets updated regularly.
-  
+  // ! cache: "force-cache" will cache the response and serve it for subsequent requests without revalidating until the cache expires. This is useful for data that doesn't change frequently and can improve performance by reducing the number of network requests.
+  // ^ next: { revalidate: 50 } will revalidate the cached data every 50 seconds. This means that after 50 seconds, the next request will trigger a new fetch to update the cache with fresh data. This is useful for data that changes periodically and ensures that users see up-to-date information without having to wait for the cache to expire completely.
+  // ! If you want to ensure that the data is always fresh and not cached, you can use cache: "no-store" instead, which will bypass the cache and fetch new data on every request.
+  // ~ In summary, using cache: "force-cache" with next: { revalidate: 50 } allows you to balance performance and freshness by caching data for a certain period while still ensuring that it gets updated regularly.
+
 
   // if (!res.ok) {
   //   return (
@@ -62,12 +63,22 @@ export default async function Home() {
   //     </form>
   //   </main>
   // );
-return (
-<>
-<h1>User Directory</h1>
-<Suspense fallback={<p>Loading users...</p>}>
-  <UserList />
-</Suspense>
-</>
-)
+  return (
+    <main className="min-h-screen bg-zinc-50 dark:bg-black p-6">
+      <div className="max-w-5xl mx-auto">
+        <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">User Directory</h1>
+
+        <div className="flex items-center gap-4">
+          <UpdateButton />
+          <AddUser />
+        </div>
+
+        <div className="mt-6">
+          <Suspense fallback={<p>Loading users...</p>}>
+            <UserList />
+          </Suspense>
+        </div>
+      </div>
+    </main>
+  );
 }
